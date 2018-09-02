@@ -1,0 +1,12 @@
+# note:  these frequencies should be in a form that Rufus understands.  E.g., 5s
+healthCreateFrequency: 5s
+statCreateFrequency: 7s
+
+healthyInterval: 30
+engineMinRPMs: 0
+engineMaxRPMs: 100
+
+statRange: 6
+
+
+
