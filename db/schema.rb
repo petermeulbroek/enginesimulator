@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 2018_09_02_014720) do
 
   create_table "healths", force: :cascade do |t|
     t.datetime "time"
-    t.boolean "value"
+    t.integer "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
