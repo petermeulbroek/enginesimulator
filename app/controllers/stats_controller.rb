@@ -1,8 +1,8 @@
 class StatsController < ApplicationController
   before_action :set_stat, only: [:show ]
-  # GET /stats
   before_action :validate_params
 
+  # GET /stats
   def index
 
     if params[:all]
@@ -22,14 +22,31 @@ class StatsController < ApplicationController
     squeue = Rufus::Scheduler.singleton.jobs.select{ |j| j.opts.has_value?("stats")}.first
     squeue.pause
 
+    json_response({result: "OK"})
   end
 
-  def destroy
+  def restart
+    # want to shut down the stat queue
+    squeue = Rufus::Scheduler.singleton.jobs.select{ |j| j.opts.has_value?("stats")}.first
+    squeue.resume
+
+    json_response({result: "OK"})
+  end
+
+  
+  def corrupt
     # corrupt data so the app looks permanently unhealthy
     Stat.create(time: Time.now(), value: -2000)
+
+    json_response({result: "OK"})
   end
 
+  def uncorrupt
+    # uncorrupt data
+    Stat.where("value < 0").delete_all
+    json_response({result: "OK"})
 
+  end
   private
   
   def validate_params

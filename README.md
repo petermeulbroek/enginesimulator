@@ -81,8 +81,18 @@ and a controller method for both.
 Values are generated asyncronously using Rufus.
 
 # Bootstrapping
+## system requirements
+## install
+## rake db:setup
+## RAILS_ENV=productionrails s
 
 
+# TODO
+1.  create a new controller /queue
+2.  create methods stop, restart
+3.  move methods from Stats
+4.  get production server working
+5.  change responses depending on results of create action
 
 application up and running.
 
