@@ -4,9 +4,9 @@ RSpec.describe 'healthcheck API', type: :request do
   # initialize test data
   let!(:healths) { create_list(:health, 10) }
 
-  describe 'GET /healths' do
+  describe 'GET /healthcheck' do
     # make HTTP get request before each example
-    before { get '/healths' }
+    before { get '/healthcheck' }
 
     it 'returns health' do
       # Note `json` is a custom helper to parse JSON responses
