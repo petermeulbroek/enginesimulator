@@ -27,7 +27,7 @@ unless defined?(Rails::Console) || File.split($0).last == 'rake'
     Rails.logger.info  'monitoring data'
     lstat = Stat.order(:time).last
 
-    Stat.create!({time: Time.now(), value: (lstat.value + rand(Settings.statRange) - Settings.statRange/2 ) })
+    Stat.create!({time: Time.now(), value: lstat.value + Settings.statRange * (rand - 0.5) })
   end
 
 end
