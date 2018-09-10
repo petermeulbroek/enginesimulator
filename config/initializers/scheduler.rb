@@ -18,7 +18,7 @@ unless defined?(Rails::Console) || File.split($0).last == 'rake'
   
   # add the health status
   scheduler.every Settings.healthCreateFrequency, :tags => 'health', :mutex => 'my_mutex' do 
-    Rails.logger.info 'healthcheck'
+    
     lstat = Stat.order(:time).last
 
     Health.create!({time: Time.now(),
@@ -28,7 +28,8 @@ unless defined?(Rails::Console) || File.split($0).last == 'rake'
                               lstat.value <= Settings.engineMaxRPMs
                             ) || 0)
                    })
-    
+    Rails.logger.info "healthcheck:  Time: %{time}, Interval: %{interval}, Value: %{value}" % {time: Time.now(), interval:  Time.now() - lstat.time, value: lstat.value}
+
   end
   
 
