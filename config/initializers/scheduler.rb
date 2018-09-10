@@ -1,4 +1,5 @@
 require 'rufus-scheduler'
+require 'time'
 
 # need to prime the pump
 Rails.logger.debug 'adding initial data'
@@ -23,12 +24,12 @@ unless defined?(Rails::Console) || File.split($0).last == 'rake'
 
     Health.create!({time: Time.now(),
                     value: ((
-                              lstat.time > Time.now() - Settings.healthyInterval &&
+                              Time.parse(lstat.time) > Time.now() - Settings.healthyInterval &&
                               lstat.value >= Settings.engineMinRPMs &&
                               lstat.value <= Settings.engineMaxRPMs
                             ) || 0)
                    })
-    Rails.logger.info "healthcheck:  Time: %{time}, Interval: %{interval}, Value: %{value}" % {time: Time.now(), interval:  Time.now() - lstat.time, value: lstat.value}
+    Rails.logger.info "healthcheck:  Time: %{time}, Interval: %{interval}, Value: %{value}" % {time: Time.now(), interval:  Time.now() - Time.parse(lstat.time), value: lstat.value}
 
   end
   

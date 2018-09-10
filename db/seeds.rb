@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 Stat.create({time: Time.now(), value: 50.0 })
-Health.create({time: Time.now(), value: true})
+Health.create({time: Time.now(), value: 1})
 
